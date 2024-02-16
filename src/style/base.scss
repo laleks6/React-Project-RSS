@@ -1,0 +1,21 @@
+html {
+    box-sizing: border-box;
+    font-size: 10px;
+    
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+ 
+.main {
+    position: relative;
+    
+}
+
+  /*Так значительно проще изменять box-sizing в 
+  плагинах или других компонентах, которые задают иное поведение.*/
+
