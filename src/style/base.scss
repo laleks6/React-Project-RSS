@@ -1,7 +1,6 @@
 html {
     box-sizing: border-box;
     font-size: 10px;
-    
   }
   
   *,
@@ -9,12 +8,20 @@ html {
   *::after {
     box-sizing: border-box;
   }
+  
+
 
  
 .main {
-    position: relative;
-    
+  position: relative;
+  transition: all 1s;
 }
+
+.block-components {
+  min-height: 80vh;
+}
+
+
 
   /*Так значительно проще изменять box-sizing в 
   плагинах или других компонентах, которые задают иное поведение.*/

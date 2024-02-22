@@ -1,32 +1,26 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 
-type State = {
-  status: boolean;
-};
-
-class ErrorBtn extends React.Component<unknown, State> {
-  constructor(props: unknown) {
-    super(props);
-    this.state = {
-      status: true,
-    };
-  }
-
-  eventErrorBtn = () => {
-    this.setState({ status: false });
-  };
-
-  render() {
-    const { status } = this.state;
-    if (!status) {
-      throw new Error('I crashed!');
-    }
-    return (
-      <button type="button" className="button" onClick={this.eventErrorBtn}>
-        click on me
-      </button>
-    );
-  }
+function ErrorBtn() {
+    const [status, setStatus] = useState(true)
+   
+    const eventErrorBtn = () => {
+        console.log('click')
+        setStatus(false)
+        
+      }
+    
+    
+        if(!status) {
+            throw new Error('I crashed!')
+        }
+        return (
+            
+            <button className="button" onClick={eventErrorBtn}>
+                click on me
+            </button>
+            
+        )
+    
 }
 
-export default ErrorBtn;
+export default ErrorBtn

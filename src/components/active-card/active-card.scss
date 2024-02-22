@@ -1,0 +1,51 @@
+.block-active-card{
+    display: none;
+    position: relative;
+    flex: 1;
+    padding: 10px;
+    border: 2px solid rgb(141, 113, 141);
+    border-radius: 10px;
+    opacity: 0;
+    transition: 1s;
+}
+.active {
+    display: block;
+    opacity: 1;
+}
+
+
+.close-icon {
+    width:40px;
+    height:40px;
+    background-color:red;
+    position:relative;
+    border-radius:6px;
+    box-shadow:2px 2px 4px 0 white;
+}
+
+.close-icon__line {
+
+    &::after, &::before {
+    content: '';
+    position:absolute;
+    width:36px;
+    height:4px;
+    background-color:white;
+    border-radius:2px;
+    top:16px;
+    box-shadow:0 0 2px 0 #ccc;
+    }
+
+    &::before {
+        transform: rotate(45deg);
+    }
+
+    &::after {
+        transform: rotate(-45deg);
+    }
+}
+
+.active-card__description {
+    color: black;
+    font-size: 20px;
+}

@@ -1,0 +1,27 @@
+.block-loading {
+    position: absolute;
+    display: flex;
+    top: 30vh;
+    left: calc(50% - 50px);
+    gap: 10px;
+}
+
+.loading__circle {
+    width: 30px;
+    height: 30px;
+    border: 2px dashed black;
+    border-radius: 50%;
+    animation: loading 1000ms infinite;
+}
+
+.loading-title {
+    align-self: center;
+}
+
+@keyframes loading {
+    20% {transform: rotate(0deg)}
+    40% {transform: rotate(90deg)}
+    60% {transform: rotate(180deg)}
+    80% {transform: rotate(270deg)}
+    100% {transform: rotate(360deg)}
+}

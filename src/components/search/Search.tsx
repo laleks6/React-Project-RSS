@@ -1,64 +1,50 @@
-import * as React from 'react';
-
+import React, { useState, useEffect } from 'react';
+// import getApi from '../request/Request-cards'
 type MyProps = {
   value: string;
   handleSearchValue: (value: string) => void;
-};
-type MyState = {
-  value: string;
+  handleActivePage: (activePage: number) => void;
 };
 
-class Search extends React.Component<MyProps, MyState> {
-  constructor(props: MyProps) {
-    super(props);
+function Search({ value, handleSearchValue, handleActivePage }: MyProps) {
+  const [searchValue, setSearchValue] = useState('');
 
-    this.state = {
-      value: '',
-    };
-  }
+  useEffect(() => {
+    setSearchValue(value);
+  }, [value]);
 
-  componentDidMount() {
-    const { value } = this.props;
-    this.setState({ value });
-  }
-
-  onClickSearchBtn = () => {
-    const { handleSearchValue } = this.props;
-    const { value } = this.state;
-
-    handleSearchValue(value);
-    localStorage.setItem('valueSearch', value);
+  const onClickSearchBtn = () => {
+    handleSearchValue(searchValue);
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    value !== localStorage.getItem('valueSearch') && handleActivePage(1);
+    localStorage.setItem('valueSearch', searchValue);
   };
-
-  onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const targetValue = e.target.value;
-    this.setState({ value: targetValue });
+    setSearchValue(targetValue);
   };
 
-  render() {
-    const { value } = this.state;
-    return (
-      <div className="search">
-        <label className="search__label" htmlFor="login">
-          Search by hero name
-          <input
-            className="search__input"
-            id="login"
-            placeholder="Search"
-            onChange={this.onChangeValue}
-            value={value}
-          />
-        </label>
-        <button
-          type="button"
-          className="search__button"
-          onClick={this.onClickSearchBtn}
-        >
-          Click
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div className="search">
+      <label className="search__label" htmlFor="login">
+        Search by hero name
+        <input
+          className="search__input"
+          id="login"
+          placeholder="Search"
+          onChange={onChangeValue}
+          value={searchValue}
+        />
+      </label>
+      <button
+        type="button"
+        className="search__button"
+        onClick={onClickSearchBtn}
+      >
+        Click
+      </button>
+    </div>
+  );
 }
 
 export default Search;
