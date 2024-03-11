@@ -1,18 +1,14 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 type Props = {
-  handleActivePage: (activePage: number) => void;
+  setActivePage: Dispatch<SetStateAction<number>>;
   quantityPage: number | number[];
   propsActivePage: number;
 };
 
-function Pogination({
-  handleActivePage,
-  quantityPage,
-  propsActivePage,
-}: Props) {
+function Pogination({ setActivePage, quantityPage, propsActivePage }: Props) {
   const clickPagination = (el: number) => {
-    handleActivePage(el);
+    setActivePage(el);
   };
 
   return (

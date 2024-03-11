@@ -1,18 +1,20 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
+import LocaleContext from '../context/LocaleContext';
 
 type TypePropsResult = {
   data: Record<string, string>;
   index: number;
-  handleActiveCard: (activeCard: number) => void;
 };
 
-function Card({ handleActiveCard, data, index }: TypePropsResult) {
+function Card({ data, index }: TypePropsResult) {
   const { image, name } = data;
+  const { setActiveCard } = useContext(LocaleContext);
   return (
     <div
+      data-testid={`click-card_${index}`}
       className={`card card-${index + 1}`}
-      onClick={() => handleActiveCard(index)}
-      onKeyDown={() => handleActiveCard(index)}
+      onClick={() => setActiveCard(index)}
+      onKeyDown={() => setActiveCard(index)}
       role="button"
       tabIndex={0}
     >

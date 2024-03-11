@@ -1,22 +1,29 @@
-import React, { useState, useEffect } from 'react';
-// import getApi from '../request/Request-cards'
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  Dispatch,
+  SetStateAction,
+} from 'react';
+import LocaleContext from '../context/LocaleContext';
+
 type MyProps = {
   value: string;
-  handleSearchValue: (value: string) => void;
-  handleActivePage: (activePage: number) => void;
+  setActivePage: Dispatch<SetStateAction<number>>;
 };
 
-function Search({ value, handleSearchValue, handleActivePage }: MyProps) {
+function Search({ value, setActivePage }: MyProps) {
   const [searchValue, setSearchValue] = useState('');
+  const { valueSearch, setValueSearch } = useContext(LocaleContext);
 
   useEffect(() => {
     setSearchValue(value);
   }, [value]);
 
   const onClickSearchBtn = () => {
-    handleSearchValue(searchValue);
+    setValueSearch(searchValue);
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    value !== localStorage.getItem('valueSearch') && handleActivePage(1);
+    valueSearch !== localStorage.getItem('valueSearch') && setActivePage(1);
     localStorage.setItem('valueSearch', searchValue);
   };
   const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {

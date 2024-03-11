@@ -1,6 +1,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import getApi from './components/request/Request-cards';
 
 import './style/main-style.scss';
@@ -8,7 +9,7 @@ import Search from './components/search/Search';
 import Result from './components/result/Result';
 import ErrorBtn from './components/error-btn/ErrorBtn';
 import Pogination from './components/pagination/Pagination';
-import { useSearchParams } from '../node_modules/react-router-dom/dist/index';
+import LocaleContext from './components/context/LocaleContext';
 
 type Promises = {
   limit: number;
@@ -20,8 +21,8 @@ type Promises = {
 function App() {
   const getLocalStorage = localStorage.getItem('valueSearch') as string;
   const [valueSearch, setValueSearch] = useState(getLocalStorage || '');
-  const [data, setData] = useState<Record<string, string | number>[] | null>(
-    null
+  const [data, setData] = useState<Record<string, string | number>[] | boolean>(
+    false
   );
   const [quantityPage, setQuantityPage] = useState<number[] | number>([]);
   const [activePage, setActivePage] = useState(1);
@@ -30,18 +31,15 @@ function App() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [loading, setLoading] = useState(true);
 
-  const handleSearchValue = (value: string): void => {
-    setValueSearch(value);
-  };
+  // const handleActivePage = (page: number) => {
+  //   setActivePage(page);
+  // };
 
-  const handleActivePage = (page: number) => {
-    setActivePage(page);
-  };
-
-  const handleActiveCard = (idCard: number) => {
-    activeCard === -1 && setActiveCard(idCard);
-    idCard === -1 && setActiveCard(idCard);
-  };
+  // const handleActiveCard = (idCard: number) => {
+  //   // activeCard === -1 && setActiveCard(idCard);
+  //   // idCard === -1 && setActiveCard(idCard);
+  //   setActiveCard(idCard);
+  // };
 
   const countPage = (total: number): void => {
     const count = Math.floor(total / limit) - 1;
@@ -87,7 +85,7 @@ function App() {
         }
       })
       .finally(() => {
-        setData(dataCardArr);
+        dataCardArr.length > 0 ? setData(dataCardArr) : setData(false);
         setLoading(true);
       });
   };
@@ -99,30 +97,29 @@ function App() {
   }, [valueSearch, activePage]);
 
   return (
-    <div className="main">
-      <div className="block-components">
-        <Search
-          value={valueSearch}
-          handleSearchValue={handleSearchValue}
-          handleActivePage={handleActivePage}
-        />
+    <LocaleContext.Provider
+      value={{
+        setValueSearch,
+        setActiveCard,
+        data,
+        valueSearch,
+      }}
+    >
+      <div className="main">
+        dwd
+        <div className="block-components">
+          <Search value={valueSearch} setActivePage={setActivePage} />
 
-        <Result
-          resultPromis={data}
-          handleActiveCard={handleActiveCard}
-          activeCard={activeCard}
-          loading={loading}
+          <Result activeCard={activeCard} loading={loading} />
+        </div>
+        <Pogination
+          setActivePage={setActivePage}
+          quantityPage={quantityPage}
+          propsActivePage={activePage}
         />
+        <ErrorBtn />
       </div>
-
-      <Pogination
-        handleActivePage={handleActivePage}
-        quantityPage={quantityPage}
-        propsActivePage={activePage}
-      />
-
-      <ErrorBtn />
-    </div>
+    </LocaleContext.Provider>
   );
 }
 
