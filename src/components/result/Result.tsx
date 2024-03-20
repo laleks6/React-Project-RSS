@@ -1,33 +1,40 @@
 import * as React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import ActiveCard from '../active-card/ActiveCard';
 import Loading from '../loading/Loading';
 import Card from './Card';
-import LocaleContext from '../context/LocaleContext';
+// import LocaleContext from '../context/LocaleContext';
 
-type TypePropsResult = {
-  activeCard: number;
-  loading: boolean;
-};
+// type TypePropsResult = {
+//   activeCard: number;
+//   loading: boolean;
+// };
 
-function Result({ activeCard, loading }: TypePropsResult) {
-  const { data } = React.useContext(LocaleContext);
+function Result() {
+  // const { data } = React.useContext(LocaleContext);
+  const { data, loading, activeCard } = useSelector((state) => state.project);
+
+  console.log('da', data.total, data.limit);
+
+  console.log(data, 'data');
+  const { recipes } = data;
   return (
     <div>
       {data ? (
         <div className="results">
           <div className="results__block-cards">
-            {!loading ? (
+            {loading ? (
               <Loading />
             ) : (
-              data.length > 0 &&
-              data.map((el, i) => {
-                return <Card key={`${el}`} data={el} index={i} />;
+              recipes.length > 0 &&
+              recipes.map((el, i) => {
+                return <Card key={`${i}`} data={el} index={i} />;
               })
             )}
           </div>
 
           {activeCard >= 0 && (
-            <ActiveCard resultPromis={data[activeCard]} index={activeCard} />
+            <ActiveCard resultPromis={recipes[activeCard]} index={activeCard} />
           )}
         </div>
       ) : (

@@ -1,29 +1,23 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  Dispatch,
-  SetStateAction,
-} from 'react';
-import LocaleContext from '../context/LocaleContext';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearch, setActivePage } from '../../store/reduxSlice';
 
-type MyProps = {
-  value: string;
-  setActivePage: Dispatch<SetStateAction<number>>;
-};
-
-function Search({ value, setActivePage }: MyProps) {
+function Search() {
   const [searchValue, setSearchValue] = useState('');
-  const { valueSearch, setValueSearch } = useContext(LocaleContext);
-
+  // const { valueSearch, setValueSearch } = useContext(LocaleContext);
+  const valueSearchSelector = useSelector((state) => state.project.valueSearch);
+  const dispatch = useDispatch();
+  const setValue = () => dispatch(setSearch(searchValue));
+  const setPage = () => dispatch(setSearch(setActivePage(1)));
   useEffect(() => {
-    setSearchValue(value);
-  }, [value]);
+    setSearchValue(valueSearchSelector);
+    setValue();
+  }, [valueSearchSelector]);
 
   const onClickSearchBtn = () => {
-    setValueSearch(searchValue);
+    setValue();
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    valueSearch !== localStorage.getItem('valueSearch') && setActivePage(1);
+    searchValue !== localStorage.getItem('valueSearch') && setPage();
     localStorage.setItem('valueSearch', searchValue);
   };
   const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
