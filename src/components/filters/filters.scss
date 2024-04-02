@@ -1,0 +1,28 @@
+.block-filters {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 40px;
+  transition: all 0.5s ease;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.filters__btn {
+  position: absolute;
+  bottom: 20px;
+  z-index: 2;
+}
+
+.border-button {
+  width: 95%;
+  border-bottom: 1px solid black;
+  padding-bottom: 20px;
+}

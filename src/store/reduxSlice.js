@@ -25,11 +25,11 @@ const reduxSlice = createSlice({
   initialState: {
     data: false,
     valueSearch: '',
-    limit: 10,
-    activePage: -1,
+    activePage: 1,
     activeCard: -1,
     loading: false,
     error: null,
+    limit: 10,
   },
   reducers: {
     setSearch: (state, action) => {
@@ -43,6 +43,9 @@ const reduxSlice = createSlice({
     },
     setActiveCard: (state, action) => {
       state.activeCard = action.payload;
+    },
+    setLimit: (state, action) => {
+      state.limit = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -63,6 +66,6 @@ const reduxSlice = createSlice({
   },
 });
 
-export const { setSearch, setData, setActivePage, setActiveCard } =
+export const { setSearch, setData, setActivePage, setActiveCard, setLimit } =
   reduxSlice.actions;
 export default reduxSlice.reducer;

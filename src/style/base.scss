@@ -1,28 +1,26 @@
 html {
-    box-sizing: border-box;
-    font-size: 10px;
-  }
-  
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-  
+  box-sizing: border-box;
+  font-size: 10px;
+}
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
- 
 .main {
   position: relative;
   transition: all 1s;
 }
 
 .block-components {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   min-height: 80vh;
+  padding-bottom: 20px;
 }
 
-
-
-  /*Так значительно проще изменять box-sizing в 
+/*Так значительно проще изменять box-sizing в 
   плагинах или других компонентах, которые задают иное поведение.*/
-

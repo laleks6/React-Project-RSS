@@ -10,6 +10,7 @@ type Props = {
 
 function Pogination({ propsActivePage, dataTotal, dataLimit }: Props) {
   const [quantityPage, setQuantityPage] = useState<number[] | number>([]);
+  const [paginationLimit, setPaginationLimit] = useState(0);
   const dispatch = useDispatch();
   const setPage = (el) => dispatch(setActivePage(el));
   const countPage = (total: number, limit: number) => {
@@ -22,6 +23,11 @@ function Pogination({ propsActivePage, dataTotal, dataLimit }: Props) {
     } else {
       setPage(1);
     }
+    console.log(limit, dataLimit, 'check LIMIT');
+    if (paginationLimit !== limit) {
+      setPage(1);
+    }
+    setPaginationLimit(limit);
     console.log(objCountPage, 'check objCountPage');
     console.log(total, 'check dataTotal');
     console.log(limit, 'check limit');
@@ -29,7 +35,7 @@ function Pogination({ propsActivePage, dataTotal, dataLimit }: Props) {
   };
   useEffect(() => {
     countPage(dataTotal, dataLimit);
-  }, [dataTotal]);
+  }, [dataLimit, dataTotal]);
   const clickPagination = (el: number) => {
     setPage(el);
   };
