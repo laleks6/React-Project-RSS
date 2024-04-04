@@ -3,20 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import ActiveCard from '../active-card/ActiveCard';
 import Loading from '../loading/Loading';
 import Card from './Card';
-// import LocaleContext from '../context/LocaleContext';
-
-// type TypePropsResult = {
-//   activeCard: number;
-//   loading: boolean;
-// };
 
 function Result() {
-  // const { data } = React.useContext(LocaleContext);
   const { data, loading, activeCard } = useSelector((state) => state.project);
 
-  console.log('da', data.total, data.limit);
-
-  console.log(data, 'data');
   const { recipes } = data;
   return (
     <div>

@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setActivePage } from '../../store/reduxSlice';
 
 type Props = {
@@ -23,14 +23,10 @@ function Pogination({ propsActivePage, dataTotal, dataLimit }: Props) {
     } else {
       setPage(1);
     }
-    console.log(limit, dataLimit, 'check LIMIT');
     if (paginationLimit !== limit) {
       setPage(1);
     }
     setPaginationLimit(limit);
-    console.log(objCountPage, 'check objCountPage');
-    console.log(total, 'check dataTotal');
-    console.log(limit, 'check limit');
     setQuantityPage(objCountPage);
   };
   useEffect(() => {

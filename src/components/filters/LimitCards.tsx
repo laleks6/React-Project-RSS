@@ -6,7 +6,6 @@ function LimitCards() {
   const changeLimit = (el: number) => dispatch(setLimit(el));
   const { limit } = useSelector((state) => state.project);
   const f = (event: { target: { value: string } }) => {
-    console.log('SELECT', event.target.value);
     changeLimit(+event.target.value);
   };
   return (

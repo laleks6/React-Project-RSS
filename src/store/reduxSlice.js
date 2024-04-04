@@ -56,8 +56,6 @@ const reduxSlice = createSlice({
       .addCase(fetchData.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
-        console.log(action.payload, 'api data action');
-        // console.log(assembly, 'api data assembly');
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.loading = false;

@@ -27,11 +27,10 @@ function Search() {
 
   return (
     <div className="search">
-      <label className="search__label" htmlFor="login">
-        Search by hero name
+      <label className="search__label" htmlFor="search">
         <input
           className="search__input"
-          id="login"
+          id="search"
           placeholder="Search"
           onChange={onChangeValue}
           value={searchValue}

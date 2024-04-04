@@ -1,51 +1,91 @@
-.block-active-card{
-    display: none;
-    position: relative;
-    flex: 1;
-    padding: 10px;
-    border: 2px solid rgb(141, 113, 141);
-    border-radius: 10px;
-    opacity: 0;
-    transition: 1s;
+.block-active-card {
+  //   display: none;
+  position: relative;
+  flex: 1;
+  padding: 10px;
+  border-left: 2px solid rgb(141, 113, 141);
+  transition: 1s;
+  opacity: 0;
+  transition: all 0.5 ease-in-out;
 }
 .active {
-    display: block;
-    opacity: 1;
+  display: block;
+  opacity: 1;
+}
+.active-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  img:hover {
+    transform: scale(1);
+  }
+  .card {
+    max-width: 50%;
+    align-self: center;
+  }
+}
+.close-icon--title {
+  opacity: 0;
+  color: black;
+  margin-bottom: -10px;
+  transition: all 0.5s ease;
 }
 
-
 .close-icon {
-    width:40px;
-    height:40px;
-    background-color:red;
-    position:relative;
-    border-radius:6px;
-    box-shadow:2px 2px 4px 0 white;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  left: 50%;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  &:hover {
+    transform: scale(0.9);
+  }
+  &:hover span {
+    opacity: 1;
+  }
 }
 
 .close-icon__line {
-
-    &::after, &::before {
+  &::after,
+  &::before {
     content: '';
-    position:absolute;
-    width:36px;
-    height:4px;
-    background-color:white;
-    border-radius:2px;
-    top:16px;
-    box-shadow:0 0 2px 0 #ccc;
-    }
+    position: absolute;
+    width: 36px;
+    height: 4px;
+    top: 50%;
+    background-color: rgb(0, 0, 0, 0.7);
+  }
 
-    &::before {
-        transform: rotate(45deg);
-    }
+  &::before {
+    transform: rotate(45deg);
+  }
 
-    &::after {
-        transform: rotate(-45deg);
-    }
+  &::after {
+    transform: rotate(-45deg);
+  }
 }
 
-.active-card__description {
-    color: black;
-    font-size: 20px;
+.first-info {
+  display: flex;
+  align-items: center;
+  font-size: 2em;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.second-info {
+  display: flex;
+  justify-content: center;
+  font-size: 2em;
+}
+
+.definition-line {
+  width: 50%;
+  height: 2px;
+  background-color: black;
 }

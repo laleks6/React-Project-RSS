@@ -1,28 +1,25 @@
 .pagination {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    bottom: 0;
-    width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+  width: 100%;
 }
 
 .pagination__list {
-    display: flex;
-    gap: 5px;
+  display: flex;
+  gap: 5px;
 }
 .pagination__item {
-    font-size: 16px;
-    padding: 10px;
-    list-style-type: none;
-    border: 1px solid black;
-    cursor: pointer;
-
-    &:hover,
-    &.active {
-        background-color: rgb(185, 174, 174);
-    }
-
-    
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  padding: 10px;
+  list-style-type: none;
+  border-radius: 50%;
+  cursor: pointer;
+  &:hover,
+  &.active {
+    background-color: rgb(141, 113, 141);
+  }
 }
-
-

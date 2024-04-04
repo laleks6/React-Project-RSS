@@ -19,8 +19,6 @@ function ActiveCard({ resultPromis, index }: TypeProps) {
   >(f);
   const [activeBlock, setActiveBlock] = useState(f);
   useEffect(() => {
-    console.log('activeBlock check', activeBlock);
-    console.log('saveData check', saveData);
     !saveData && setSaveData(resultPromis);
     !activeBlock && setActiveBlock(true);
   }, [index]);
@@ -28,10 +26,7 @@ function ActiveCard({ resultPromis, index }: TypeProps) {
     setActiveBlock(f);
     setSaveData(f);
     setCard();
-    console.log('CLICK CLOUSR ACTIVE CARD');
   };
-  console.log('ActiveCard');
-  console.log('ActiveCard', saveData);
   return (
     <div
       data-testid="active--card"
@@ -41,20 +36,26 @@ function ActiveCard({ resultPromis, index }: TypeProps) {
         <>
           <div className="close-icon" onClick={clickClose}>
             <div className="close-icon__line" />
+            <span className="close-icon--title">ClOSE</span>
           </div>
           <div className="active-card">
-            <Card data={saveData} index={index} />
-            <div className="active-card__description">
-              <div>
+            <div className="first-info">
+              <Card data={saveData} index={index} />
+              <ul>
+                <strong> Ingredients</strong>
                 {saveData!.ingredients.map((el) => (
-                  <span>{` ◾${el} `}</span>
+                  <li key={el}>{`${el} `}</li>
                 ))}
-              </div>
-              <div>
+              </ul>
+            </div>
+            <div className="definition-line"></div>
+            <div className="second-info">
+              <ol>
+                <strong> Instructions</strong>
                 {saveData!.instructions.map((el) => (
-                  <span>{` ◾${el} `}</span>
+                  <li key={el}>{` ${el} `}</li>
                 ))}
-              </div>
+              </ol>
             </div>
           </div>
         </>

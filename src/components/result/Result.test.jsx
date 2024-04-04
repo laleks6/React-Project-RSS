@@ -62,14 +62,12 @@ describe('Result component', () => {
 
 describe('Card component', () => {
   it('Verify that the component renders the specified number of cards', () => {
-    // render(<Card key={`${1}`} data={data[1]} index={1} />);
     render(
       <LocaleContext.Provider value={{ data }}>
         <Result loading />
       </LocaleContext.Provider>
     );
 
-    const card = screen.queryByTestId('click-card_1');
     screen.debug();
     expect(screen.queryByTestId('active--card')).toBeNull();
     expect(screen.queryByTestId('click-card_1')).toBeInTheDocument();

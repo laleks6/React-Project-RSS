@@ -7,7 +7,6 @@ const assemblyData = async (data: {
   console.log('da', data.total, data.limit, data);
   for (let i = 0; i <= data.total; i++) {
     const dataResults = data.recipes[i];
-    console.log('dataResults', dataResults.name);
     const obj = {
       name: '',
       mealType: '',
@@ -28,6 +27,5 @@ const assemblyData = async (data: {
     dataCard.push(obj);
   }
   return dataCard;
-  console.log('dataCard', dataCard);
 };
 export default assemblyData;

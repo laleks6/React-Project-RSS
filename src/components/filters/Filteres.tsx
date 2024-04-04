@@ -14,7 +14,6 @@ function Filters() {
         setactiveBlock={setactiveBlock}
         activeBlock={activeBlock}
       />
-      {/* <div className="border-button"></div> */}
     </div>
   );
 }

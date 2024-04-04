@@ -18,7 +18,14 @@
 .filters__btn {
   position: absolute;
   bottom: 20px;
+  background-color: $btn-color;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
   z-index: 2;
+  &:hover {
+    background-color: rgb(141, 113, 141);
+  }
 }
 
 .border-button {

@@ -36,20 +36,6 @@ function App() {
     // extractionPromis(request);
     // setSearchParams(`searche=${valueSearch}&page=${activePage}`);
   }, [dispatch, activePage, valueSearch, limit]);
-  const arr = [4, 4, 1, 1, 1, 5, 5, 6, 7, 7, 8, 8, 8, 9, 11];
-  const f = () => {
-    const newArr = [];
-    for (let i = 0; i < arr.length; i++) {
-      console.log(arr.indexOf[arr[i]]);
-      console.log(arr.lastIndexOf[arr[i]]);
-      if (arr.indexOf[arr[i]] !== arr.lastIndexOf[arr[i]]) {
-        newArr.push(arr[i]);
-      }
-    }
-    console.log(newArr, '2');
-    return newArr;
-  };
-  f();
   return (
     <div className="main">
       <div className="block-components">

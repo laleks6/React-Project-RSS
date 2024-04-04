@@ -4,7 +4,6 @@ function ErrorBtn() {
   const [status, setStatus] = useState(true);
 
   const eventErrorBtn = () => {
-    console.log('click');
     setStatus(false);
   };
 
