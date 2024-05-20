@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import ActiveCard from '../active-card/ActiveCard';
 import Loading from '../loading/Loading';
 import Card from './Card';

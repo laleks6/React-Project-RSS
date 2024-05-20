@@ -4,7 +4,6 @@ import { setSearch, setActivePage } from '../../store/reduxSlice';
 
 function Search() {
   const [searchValue, setSearchValue] = useState('');
-  // const { valueSearch, setValueSearch } = useContext(LocaleContext);
   const valueSearchSelector = useSelector((state) => state.project.valueSearch);
   const dispatch = useDispatch();
   const setValue = () => dispatch(setSearch(searchValue));
@@ -16,7 +15,6 @@ function Search() {
 
   const onClickSearchBtn = () => {
     setValue();
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     searchValue !== localStorage.getItem('valueSearch') && setPage();
     localStorage.setItem('valueSearch', searchValue);
   };
