@@ -14,6 +14,7 @@
 <img src="https://user-images.githubusercontent.com/25181517/121401671-49102800-c959-11eb-9f6f-74d49a5e1774.png" width="36" height="36" title="npm" />
 </p>
 
+## Screenshot:
 ![recipes](https://github.com/laleks6/Recipes-SPA-RSS/assets/96025122/0c5826d1-7039-4740-a433-ed2d172b8ead)
 
 
