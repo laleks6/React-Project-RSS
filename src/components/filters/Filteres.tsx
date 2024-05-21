@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import LimitCards from './LimitCards';
 import ButtonDropDown from './ButtonDropDown';
+
 function Filters() {
   const [activeBlock, setactiveBlock] = useState(false);
   return (
     <div className="block-filters">
       {activeBlock && (
-        <div className={`filters`}>
+        <div className="filters">
           <LimitCards />
         </div>
       )}

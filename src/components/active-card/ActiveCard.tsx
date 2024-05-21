@@ -1,30 +1,27 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAppDispatch } from '../../hook';
 import Card from '../result/Card';
-import LocaleContext from '../context/LocaleContext';
-import { useDispatch, useSelector } from 'react-redux';
 import { setActiveCard } from '../../store/reduxSlice';
+import { Recipe } from '../../types/types';
 
 type TypeProps = {
-  resultPromis: Record<string, string | number>;
+  resultPromis: Recipe;
   index: number;
 };
 const f = false;
 
 function ActiveCard({ resultPromis, index }: TypeProps) {
-  const activeCard = useSelector((state) => state.project.activeCard);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const setCard = () => dispatch(setActiveCard(-1));
-  const [saveData, setSaveData] = useState<
-    Record<string, string | number> | boolean
-  >(f);
+  const [saveData, setSaveData] = useState<Recipe | null>(null);
   const [activeBlock, setActiveBlock] = useState(f);
   useEffect(() => {
-    !saveData && setSaveData(resultPromis);
-    !activeBlock && setActiveBlock(true);
+    if (!saveData) setSaveData(resultPromis);
+    if (!activeBlock) setActiveBlock(true);
   }, [index]);
   const clickClose = () => {
     setActiveBlock(f);
-    setSaveData(f);
+    setSaveData(null);
     setCard();
   };
   return (
@@ -34,26 +31,31 @@ function ActiveCard({ resultPromis, index }: TypeProps) {
     >
       {activeBlock && (
         <>
-          <div className="close-icon" onClick={clickClose}>
+          <div
+            className="close-icon"
+            onClick={() => clickClose()}
+            onKeyDown={() => clickClose()}
+            aria-hidden
+          >
             <div className="close-icon__line" />
             <span className="close-icon--title">ClOSE</span>
           </div>
           <div className="active-card">
             <div className="first-info">
-              <Card data={saveData} index={index} />
+              {saveData && <Card data={saveData} index={index} />}
               <ul>
                 <strong> Ingredients</strong>
                 {saveData!.ingredients.map((el) => (
-                  <li key={el}>{`${el} `}</li>
+                  <li key={`${el}`}>{`${el} `}</li>
                 ))}
               </ul>
             </div>
-            <div className="definition-line"></div>
+            <div className="definition-line" />
             <div className="second-info">
               <ol>
                 <strong> Instructions</strong>
                 {saveData!.instructions.map((el) => (
-                  <li key={el}>{` ${el} `}</li>
+                  <li key={`${el}`}>{` ${el} `}</li>
                 ))}
               </ol>
             </div>

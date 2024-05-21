@@ -1,14 +1,16 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../hook';
 import { setLimit } from '../../store/reduxSlice';
+
 function LimitCards() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const changeLimit = (el: number) => dispatch(setLimit(el));
-  const { limit } = useSelector((state) => state.project);
+  const { limit } = useAppSelector((state) => state.project);
   const f = (event: { target: { value: string } }) => {
     changeLimit(+event.target.value);
   };
   return (
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label>
       Limit cards:
       <select value={`${limit}`} onChange={f}>

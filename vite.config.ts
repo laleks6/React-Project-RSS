@@ -13,7 +13,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  base: "/React-Project-RSS/",
+  base: process.env.NODE_ENV === "production" ? "/Recipes-SPA-RSS/" : "/",
   plugins: [react()],
   test: {
     globals: true,

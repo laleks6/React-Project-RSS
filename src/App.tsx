@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 
 import './style/main-style.scss';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from './hook';
 import Search from './components/search/Search';
 import Result from './components/result/Result';
 import ErrorBtn from './components/error-btn/ErrorBtn';
@@ -13,10 +13,11 @@ import Filters from './components/filters/Filteres';
 import Header from './components/header/Header';
 
 function App() {
-  const { data, valueSearch, activePage, limit } = useSelector(
+  const { data, valueSearch, activePage, limit } = useAppSelector(
     (state) => state.project
   );
-  const dispatch = useDispatch();
+  console.log(data, 'data');
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchData({ valueSearch, limit, activePage }));
@@ -30,11 +31,13 @@ function App() {
           <Filters />
           <Result />
         </div>
-        <Pogination
-          propsActivePage={activePage}
-          dataTotal={data.total}
-          dataLimit={limit}
-        />
+        {data && (
+          <Pogination
+            propsActivePage={activePage}
+            dataTotal={data.total}
+            dataLimit={limit}
+          />
+        )}
         <ErrorBtn />
       </div>
     </>

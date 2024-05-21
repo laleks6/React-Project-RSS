@@ -1,10 +1,38 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { forEachChild } from 'typescript';
-import assemblyData from '../components/request/assembly-card';
+import { Data } from '../types/types';
+
+type Link = {
+  valueSearch: string;
+  limit: number;
+  activePage: number;
+};
+
+type InitialState = {
+  data: Data | null;
+  valueSearch: string;
+  activePage: number;
+  activeCard: number;
+  loading: boolean;
+  error: null | boolean;
+  limit: number;
+};
+
+const initialState: InitialState = {
+  data: null,
+  valueSearch: '',
+  activePage: 1,
+  activeCard: -1,
+  loading: false,
+  error: null,
+  limit: 10,
+};
 
 export const fetchData = createAsyncThunk(
   'project/fetchData',
-  async function ({ valueSearch, limit, activePage }, { rejectWithValue }) {
+  async function (
+    { valueSearch, limit, activePage }: Link,
+    { rejectWithValue }
+  ) {
     const countSkip = activePage === 1 ? 0 : activePage * limit;
     const link = `https://dummyjson.com/recipes/search?q=${valueSearch}&limit=${limit}&skip=${countSkip}`;
     try {
@@ -15,22 +43,17 @@ export const fetchData = createAsyncThunk(
       }
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return '';
     }
   }
 );
 
 const reduxSlice = createSlice({
   name: 'project',
-  initialState: {
-    data: false,
-    valueSearch: '',
-    activePage: 1,
-    activeCard: -1,
-    loading: false,
-    error: null,
-    limit: 10,
-  },
+  initialState,
   reducers: {
     setSearch: (state, action) => {
       state.valueSearch = action.payload;
@@ -57,9 +80,8 @@ const reduxSlice = createSlice({
         state.loading = false;
         state.data = action.payload;
       })
-      .addCase(fetchData.rejected, (state, action) => {
+      .addCase(fetchData.rejected, (state) => {
         state.loading = false;
-        state.error = action.payload;
       });
   },
 });

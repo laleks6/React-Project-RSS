@@ -1,18 +1,19 @@
-import React, { useContext } from 'react';
-import LocaleContext from '../context/LocaleContext';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useAppDispatch } from '../../hook';
 import { setActiveCard } from '../../store/reduxSlice';
 import iconStar from '../../assets/icon_star.png';
+import { Recipe } from '../../types/types';
+
 type TypePropsResult = {
-  data: Record<string, string>;
+  data: Recipe;
   index: number;
 };
 
 function Card({ data, index }: TypePropsResult) {
   const { image, name } = data;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const setActiveCardDispatch = (el: number) => dispatch(setActiveCard(el));
-  const styleDifficulty = {
+  const styleDifficulty: Record<string, Record<string, string>> = {
     Easy: {
       'background-color': 'blue',
     },
@@ -34,12 +35,12 @@ function Card({ data, index }: TypePropsResult) {
       <div className="card__block-img">
         <div className="food-img">
           {' '}
-          <img className="card__img" src={image} alt={name} />
+          <img className="card__img" src={`${image}`} alt={`${name}`} />
         </div>
 
         <div className="card__tags">
           <div
-            style={styleDifficulty[data.difficulty]}
+            style={styleDifficulty[`${data.difficulty}`]}
             className="tags__difficulty"
           >
             {data.difficulty}

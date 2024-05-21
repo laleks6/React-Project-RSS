@@ -20,5 +20,12 @@ module.exports = {
     project: "./tsconfig.json",
   },
   plugins: ["react", "@typescript-eslint", "prettier"],
-  rules: {},
+  rules: {
+    "no-param-reassign": [
+      2,
+      {
+        props: false,
+      },
+    ],
+  },
 };

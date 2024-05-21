@@ -11,7 +11,7 @@ function ErrorBtn() {
     throw new Error('I crashed!');
   }
   return (
-    <button className="button" onClick={eventErrorBtn}>
+    <button type="button" className="button" onClick={eventErrorBtn}>
       click on me
     </button>
   );

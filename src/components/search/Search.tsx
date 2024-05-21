@@ -1,11 +1,13 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../hook';
 import { setSearch, setActivePage } from '../../store/reduxSlice';
 
 function Search() {
   const [searchValue, setSearchValue] = useState('');
-  const valueSearchSelector = useSelector((state) => state.project.valueSearch);
-  const dispatch = useDispatch();
+  const valueSearchSelector = useAppSelector(
+    (state) => state.project.valueSearch
+  );
+  const dispatch = useAppDispatch();
   const setValue = () => dispatch(setSearch(searchValue));
   const setPage = () => dispatch(setSearch(setActivePage(1)));
   useEffect(() => {
@@ -13,10 +15,17 @@ function Search() {
     setValue();
   }, [valueSearchSelector]);
 
-  const onClickSearchBtn = () => {
+  function sendingReq() {
     setValue();
-    searchValue !== localStorage.getItem('valueSearch') && setPage();
+    if (searchValue !== localStorage.getItem('valueSearch')) setPage();
     localStorage.setItem('valueSearch', searchValue);
+  }
+
+  const onClickSearchBtn = () => {
+    sendingReq();
+  };
+  const onClickSearchEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') sendingReq();
   };
   const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const targetValue = e.target.value;
@@ -31,6 +40,7 @@ function Search() {
           id="search"
           placeholder="Search"
           onChange={onChangeValue}
+          onKeyDown={(e) => onClickSearchEnter(e)}
           value={searchValue}
         />
       </label>

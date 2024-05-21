@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../hook';
 import ActiveCard from '../active-card/ActiveCard';
 import Loading from '../loading/Loading';
 import Card from './Card';
 
 function Result() {
-  const { data, loading, activeCard } = useSelector((state) => state.project);
+  const { data, loading, activeCard } = useAppSelector(
+    (state) => state.project
+  );
 
-  const { recipes } = data;
   return (
     <div>
       {data ? (
@@ -16,15 +17,18 @@ function Result() {
             {loading ? (
               <Loading />
             ) : (
-              recipes.length > 0 &&
-              recipes.map((el, i) => {
-                return <Card key={`${i}`} data={el} index={i} />;
+              data.recipes &&
+              data.recipes.map((el, i) => {
+                return <Card key={`${el}`} data={el} index={i} />;
               })
             )}
           </div>
 
           {activeCard >= 0 && (
-            <ActiveCard resultPromis={recipes[activeCard]} index={activeCard} />
+            <ActiveCard
+              resultPromis={data.recipes[activeCard]}
+              index={activeCard}
+            />
           )}
         </div>
       ) : (

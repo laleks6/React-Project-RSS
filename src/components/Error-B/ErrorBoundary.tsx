@@ -6,15 +6,16 @@ interface Props {
 }
 
 interface State {
-  hasError: boolean | string;
+  hasError: null | Record<string, string>;
 }
 
 class ErrorBoundary extends React.Component<Props, State> {
+  // eslint-disable-next-line react/state-in-constructor
   public state: State = {
-    hasError: false,
+    hasError: null,
   };
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: unknown) {
     return { hasError: error };
   }
 
@@ -26,11 +27,11 @@ class ErrorBoundary extends React.Component<Props, State> {
       return (
         <div className="block-error">
           <img src={gif404} width="60%" alt="gif" />
-          <p>{hasError.message}</p>
+          {hasError && <p>{hasError.message}</p>}
           <button
             type="button"
             className="error-btn"
-            onClick={() => this.setState({ hasError: false })}
+            onClick={() => this.setState({ hasError: null })}
           >
             Try again?
           </button>
