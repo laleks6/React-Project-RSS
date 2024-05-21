@@ -1,5 +1,8 @@
 # Recipes  (React-Project-RSS)
 
+## Link project
+### https://laleks6.github.io/Recipes-SPA-RSS/
+
 ## Task stack
 
 <p align="left">
@@ -34,8 +37,4 @@ _Below is an example of how to install and configure the application._
 2. Install NPM packages
    ```sh
    npm install
-   ```
-3. Start project
-   ```sh
-   npm run dev
    ```
